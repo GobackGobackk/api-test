@@ -1,23 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import { useState } from "react";
 
 function App() {
+  const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [repos, setRepos] = useState([]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    searchRepos();
+  }
+
+  function searchRepos() {
+    setLoading(true);
+    axios({
+      method: "get",
+      url: 'https://api.github.com/users/' + username + '/repos',
+    }).then(res => {
+      setLoading(false);
+      setRepos(res.data);
+    });
+  }
+  function renderRepo(repo) {
+    return (
+      <div className='row' key={repo.id}>
+        <h2 className='repo-name'>
+          {repo.name}
+        </h2>
+      </div>
+    )
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="page">
+      <div className="landing-page-container">
+        <div className='left-side'>
+          <form className='form'>
+            <input
+            className='input'
+            value={username}
+            placeholder="GitHub Username"
+            onChange={e => setUsername(e.target.value)}
+            />
+            <button className='button' onClick={handleSubmit}>{loading ? "Searching..." : "Search"}</button>
+          </form>
+          <div className='results-container'>
+            {repos.map(renderRepo)}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
