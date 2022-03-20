@@ -68,4 +68,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### 請先裝 axios 可輸入 npm add axios 或 yarn add axios
+### 使用者須打全名 大小寫不拘
 ![image](https://github.com/GobackGobackk/api-test/blob/main/pic/pic.png)
